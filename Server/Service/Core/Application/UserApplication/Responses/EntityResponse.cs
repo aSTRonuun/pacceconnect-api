@@ -1,4 +1,4 @@
-﻿using Application.Utils;
+﻿using Application.Utils.Response;
 
 namespace Application.EntityApplication.Responses
 {

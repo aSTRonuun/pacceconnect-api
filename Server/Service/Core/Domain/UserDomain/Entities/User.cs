@@ -1,6 +1,6 @@
 ﻿using Domain.EntityDomain.Enuns;
 using Domain.UserDomain.Exceptions;
-using Domain.Utils;
+using Domain.UtilsTools;
 using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Security.Cryptography;
