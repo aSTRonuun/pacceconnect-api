@@ -4,9 +4,9 @@ using MediatR;
 
 namespace Application.UserApplication.Commands
 {
-    public class UserAuthenticationCommand : IRequest<Response>
+    public class CreateArticulatorCommand : IRequest<Response>
     {
-        public UserAuthenticationCommand(LoginUserDto loginUser, string secretKey)
+        public CreateArticulatorCommand(LoginUserDto loginUser, string secretKey)
         {
             LoginUser = loginUser;
             SecretKey = secretKey;

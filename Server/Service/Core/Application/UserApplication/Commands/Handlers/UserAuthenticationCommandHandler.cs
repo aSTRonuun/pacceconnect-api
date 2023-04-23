@@ -9,16 +9,16 @@ using static Application.Utils.ResponseBase.Response;
 
 namespace Application.UserManager.Commands.Handlers
 {
-    public class UserAuthenticationCommandHandler : IRequestHandler<UserAuthenticationCommand, Response>
+    public class CreateManagerCommandHandler : IRequestHandler<CreateArticulatorCommand, Response>
     {
         private readonly IUserRepository _userRepository;
 
-        public UserAuthenticationCommandHandler(IUserRepository userRepository)
+        public CreateManagerCommandHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        public async Task<Response> Handle(UserAuthenticationCommand request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(CreateArticulatorCommand request, CancellationToken cancellationToken)
         {
             try
             {

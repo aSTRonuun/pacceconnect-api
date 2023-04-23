@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.EntityDomain.Exceptions
+namespace Domain.UserDomain.Exceptions
 {
-    internal class EntityMissingRequiredInformationException
+    public class ArticulatorMissingRequiredInformation : Exception
     {
     }
 }

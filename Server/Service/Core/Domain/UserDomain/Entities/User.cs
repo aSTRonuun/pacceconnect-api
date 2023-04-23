@@ -1,4 +1,4 @@
-﻿using Domain.EntityDomain.Enuns;
+﻿using Domain.UserDomain.Enuns;
 using Domain.UserDomain.Exceptions;
 using Domain.UtilsTools;
 using System.ComponentModel.DataAnnotations;
@@ -15,7 +15,7 @@ namespace Domain.UserDomain.Entities
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public string Email { get; set; }
-        public Role Role { get; set; }
+        public Roles Role { get; set; }
 
         public void CreatePasswordHash(string password)
         {
@@ -40,7 +40,7 @@ namespace Domain.UserDomain.Entities
             if (string.IsNullOrEmpty(UserName) ||
                 string.IsNullOrEmpty(Email) ||
                 Role.Equals(null))
-                throw new UserMissingRequiredInfomationException();
+                throw new UserMissingRequiredInformationException();
 
             if (!Utils.IsValidEmail(Email))
                 throw new UserInvalidEmailException();

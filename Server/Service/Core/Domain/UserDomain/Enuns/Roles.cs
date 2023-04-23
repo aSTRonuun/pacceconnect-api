@@ -1,6 +1,6 @@
 ﻿namespace Domain.UserDomain.Enuns
 {
-    public enum Role
+    public enum Roles
     {
         Manager = 0,
         Articulator = 1,

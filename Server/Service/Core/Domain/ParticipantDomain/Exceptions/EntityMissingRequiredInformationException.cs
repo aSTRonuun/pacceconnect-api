@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.EntityDomain.Exceptions
 {
-    internal class EntityMissingRequiredInformationException
+    internal class ManagerMissingRequiredInformationException
     {
     }
 }
