@@ -1,4 +1,4 @@
-﻿namespace Application.EntityApplication.Queries.Handlers
+﻿namespace Application.ManagerApplication.Queries.Handlers
 {
     public class GetEntityQueryHandler
     {

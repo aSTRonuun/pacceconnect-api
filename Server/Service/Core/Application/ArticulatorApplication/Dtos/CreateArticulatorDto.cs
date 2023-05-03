@@ -15,7 +15,7 @@ namespace Application.ArticulatorApplication.Dtos
         public string Password { get; set; }
         public Course Course { get; set; }
         public int Matriculation { get; set; }
-        public string PhoneNumer { get; set; }
+        public string? PhoneNumer { get; set; }
 
         public static Articulator MapToEntity(CreateArticulatorDto articulatorDto)
         {

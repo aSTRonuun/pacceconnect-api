@@ -1,11 +1,8 @@
-﻿using Application.Service.Security;
-using Application.UserApplication.Dtos;
-using Application.Utils;
+﻿using Application.Utils;
 using Application.Utils.ResponseBase;
 using MediatR;
 using static Application.Utils.ResponseBase.Response;
 using Domain.ArticulatorDomain.Ports;
-using Application.ArticulatorApplication.Commands;
 using Application.ArticulatorApplication.Dtos;
 
 namespace Application.ArticulatorApplication.Commands.Handlers
@@ -28,7 +25,7 @@ namespace Application.ArticulatorApplication.Commands.Handlers
 
                 articulator.CreatePasswordHash(articulatorDto.Password);
 
-                await _articulatorRepository.Create(articulator);
+                await articulator.Save(_articulatorRepository);
 
                 articulatorDto.Id = articulator.Id;
 

@@ -1,4 +1,4 @@
-﻿namespace Application.EntityApplication.Queries
+﻿namespace Application.ManagerApplication.Queries
 {
     public class GetEntityQuery
     {

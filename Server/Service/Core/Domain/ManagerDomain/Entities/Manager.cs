@@ -20,7 +20,7 @@ namespace Domain.ManagerDomain.Entities
             CreatedAt = DateTime.UtcNow;
         }
 
-        private void ValidateStateAdmin()
+        private void ValidateStateManager()
         {
             if (string.IsNullOrEmpty(FullName) || 
                 string.IsNullOrEmpty(Phone)) 
@@ -31,13 +31,15 @@ namespace Domain.ManagerDomain.Entities
 
         public bool IsValidate()
         {
-            ValidateStateAdmin();
+            ValidateStateManager();
             ValidateStateUser();
             return true;
         }
 
         public async Task Save(IManagerRepository managerRepository)
         {
+            IsValidate();
+
             if (Id == 0)
             {
                 await Create(managerRepository); return;

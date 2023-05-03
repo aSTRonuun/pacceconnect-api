@@ -15,21 +15,21 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{E7498AB1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{8F8BC1C6-3F93-4F36-AF07-B4DF8FA2B8EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Service\Core\Application\Application.csproj", "{27B7DDE8-8087-40E3-9D77-CFB26CAE381C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Service\Core\Application\Application.csproj", "{27B7DDE8-8087-40E3-9D77-CFB26CAE381C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{65D5CBD1-0935-49D6-8835-AFBF0ECF2E2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Service\Core\Domain\Domain.csproj", "{C3281188-1C20-4133-8314-0A465435BF45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Service\Core\Domain\Domain.csproj", "{C3281188-1C20-4133-8314-0A465435BF45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPI", "Service\Consumers\WebAPI\WebAPI.csproj", "{F6557DAF-1270-4B44-AA0D-E993BAFFB1D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebAPI", "Service\Consumers\WebAPI\WebAPI.csproj", "{F6557DAF-1270-4B44-AA0D-E993BAFFB1D5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTets", "UnitTets", "{A9905BBD-773A-4969-AB65-5F2A8ECDAAB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "Service\Tests\UnitTests\UnitTests.csproj", "{6EBF287D-DCE7-4E02-9269-6BC49C262FC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "Service\Tests\UnitTests\UnitTests.csproj", "{6EBF287D-DCE7-4E02-9269-6BC49C262FC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Service\Adapters\Data\Data.csproj", "{E0137A20-18DE-42C9-94FB-9DFE875D9095}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Service\Adapters\Data\Data.csproj", "{E0137A20-18DE-42C9-94FB-9DFE875D9095}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger", "Service\Adapters\Messenger\Messenger.csproj", "{73F1EE84-46DE-493A-9C8C-9594544E6949}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messenger", "Service\Adapters\Messenger\Messenger.csproj", "{73F1EE84-46DE-493A-9C8C-9594544E6949}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{B1B5B012-1CFF-4BA0-88F7-1B4CFBEE1B9E}"
 	ProjectSection(SolutionItems) = preProject
