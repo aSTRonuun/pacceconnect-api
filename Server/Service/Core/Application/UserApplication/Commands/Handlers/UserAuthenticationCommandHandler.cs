@@ -1,5 +1,4 @@
-﻿using Application.UserApplication.Commands;
-using Application.Service.Security;
+﻿using Application.Service.Security;
 using Application.UserApplication.Dtos;
 using Application.Utils;
 using Application.Utils.ResponseBase;
@@ -7,25 +6,25 @@ using Domain.UserDomain.Ports;
 using MediatR;
 using static Application.Utils.ResponseBase.Response;
 
-namespace Application.UserManager.Commands.Handlers
+namespace Application.UserApplication.Commands.Handlers
 {
-    public class CreateManagerCommandHandler : IRequestHandler<CreateArticulatorCommand, Response>
+    public class UserAuthenticationCommandHandler : IRequestHandler<UserAuthenticationCommand, Response>
     {
         private readonly IUserRepository _userRepository;
 
-        public CreateManagerCommandHandler(IUserRepository userRepository)
+        public UserAuthenticationCommandHandler(IUserRepository userRepository)
         {
             _userRepository = userRepository;
         }
 
-        public async Task<Response> Handle(CreateArticulatorCommand request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(UserAuthenticationCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 var user = await _userRepository.GetUserByUserNameOrEmail(request.LoginUser.EmailOrUserName);
                 if (user == null)
                 {
-                    return new BadRequest("User not found", ErrorCodes.USER_NOT_FOUND);
+                    return new NotFound("User not found", ErrorCodes.USER_NOT_FOUND);
                 }
 
                 if (!user.VerifyPasswordHash(request.LoginUser.Password))

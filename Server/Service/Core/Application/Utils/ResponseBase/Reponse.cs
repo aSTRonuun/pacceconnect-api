@@ -5,6 +5,7 @@ namespace Application.Utils.ResponseBase
 {
     public sealed partial class Response : OneOfBase<Success, BadRequest, NotFound>
     {
+
         public Response(OneOf<Success, BadRequest, NotFound> input) : base(input)
         {
         }

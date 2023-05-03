@@ -1,0 +1,1 @@
+for i in `find /home/database/migrations -name "*.sql" | sort --version-sort`; do mysql -udocker -pdocker pacceconnect-db < $i; done;

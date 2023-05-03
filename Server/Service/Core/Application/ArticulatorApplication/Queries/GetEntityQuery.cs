@@ -1,4 +1,4 @@
-﻿namespace Application.EntityApplication.Queries
+﻿namespace Application.ArticulatorApplication.Queries
 {
     public class GetEntityQuery
     {

@@ -1,6 +1,5 @@
 ﻿using Domain.ArticulatorDomain.Ports;
 using Domain.ArticulatorDomain.ValueObjects;
-using Domain.EntityDomain.Enuns;
 using Domain.UserDomain.Entities;
 using Domain.UserDomain.Enuns;
 using Domain.UserDomain.Exceptions;

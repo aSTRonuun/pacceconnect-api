@@ -1,9 +1,5 @@
-﻿using Application.UserApplication.Commands;
-using Application.Service.Security;
-using Application.UserApplication.Dtos;
-using Application.Utils;
+﻿using Application.Utils;
 using Application.Utils.ResponseBase;
-using Domain.UserDomain.Ports;
 using MediatR;
 using static Application.Utils.ResponseBase.Response;
 using Domain.ManagerDomain.Ports;
@@ -29,7 +25,7 @@ namespace Application.ManagerApplication.Commands.Handlers
 
                 manager.CreatePasswordHash(managerDto.Password);
 
-                await _managerRepository.Create(manager);
+                await manager.Save(_managerRepository);
                 
                 managerDto.Id = manager.Id;
 
@@ -37,7 +33,7 @@ namespace Application.ManagerApplication.Commands.Handlers
             }
             catch (Exception)
             {
-                return new BadRequest("Unable to athenticate user", ErrorCodes.USER_NOT_FOUND);
+                return new BadRequest("Manager Could not be storage", ErrorCodes.ARTICULATOR_COULD_NOT_BE_STORAGE);
             }
         }
     }

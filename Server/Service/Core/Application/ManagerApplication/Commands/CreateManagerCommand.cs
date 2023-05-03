@@ -8,12 +8,12 @@ namespace Application.ManagerApplication.Commands
 {
     public class CreateManagerCommand : IRequest<Response>
     {
-        public CreateManagerCommand(CreateManagerDto createManagerDto)
+        public CreateManagerCommand(Dtos.CreateManagerDto createManagerDto)
         {
             CreateManagerDto = createManagerDto;
         }
 
-        public CreateManagerDto CreateManagerDto { get; set; }
+        public Dtos.CreateManagerDto CreateManagerDto { get; set; }
     }
 
 }

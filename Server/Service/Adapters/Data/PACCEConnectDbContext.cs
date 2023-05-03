@@ -12,6 +12,7 @@ namespace Data
 
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Articulator> Articulators { get; set; }
+        public virtual DbSet<Manager> Managers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
