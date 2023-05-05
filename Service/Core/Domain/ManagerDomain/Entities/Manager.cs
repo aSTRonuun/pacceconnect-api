@@ -9,7 +9,7 @@ namespace Domain.ManagerDomain.Entities
     public class Manager : User
     {
         public string FullName { get; set; } = string.Empty;
-        public string Phone { get; set; } = string.Empty;
+        public string Phone { get; set; } = string.Empty ;
         public Status Status { get; set; }
         public DateTime CreatedAt { get; set; }
 
