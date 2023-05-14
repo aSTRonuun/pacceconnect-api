@@ -1,5 +1,6 @@
 ﻿using Domain.ArticulatorDomain.Entities;
 using Domain.ArticulatorDomain.Ports;
+using Microsoft.EntityFrameworkCore;
 
 namespace Data.ArticulatorData
 {
@@ -16,6 +17,11 @@ namespace Data.ArticulatorData
         {
             _context.Articulators.Add(articulator);
             return await _context.SaveChangesAsync();
+        }
+
+        public async Task<Articulator?> GetById(int id)
+        {
+            return await _context.Articulators.FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<int> Update(Articulator articulator)

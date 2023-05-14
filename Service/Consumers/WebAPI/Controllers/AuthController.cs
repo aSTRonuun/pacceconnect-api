@@ -24,7 +24,7 @@ namespace WebAPI.Controllers
         [Produces("application/json")]
         [ProducesResponseType(200)]
         [ProducesResponseType(typeof(TokenDto), Status200OK)]
-        [ProducesResponseType(Status404NotFound)]
+        [ProducesResponseType(Status401Unauthorized)]
         [ProducesResponseType(Status500InternalServerError)]
         public async Task<ActionResult<TokenDto>> Authenticate([FromBody] LoginUserDto userDto)
         {
@@ -46,12 +46,12 @@ namespace WebAPI.Controllers
                     this.ModelState.AddModelError("Message", BadRequest.Message);
                     this.ModelState.AddModelError("ErrorCode", $"{BadRequest.ErrorCodes}");
 
-                    return this.NotFound(new ValidationProblemDetails(this.ModelState));
+                    return this.Unauthorized(new ValidationProblemDetails(this.ModelState));
                 },
-                NotFound =>
+                InternalServerError =>
                 {
-                    this.ModelState.AddModelError("Message", NotFound.Message);
-                    this.ModelState.AddModelError("ErrorCode", $"{NotFound.ErrorCodes}");
+                    this.ModelState.AddModelError("Message", InternalServerError.Message);
+                    this.ModelState.AddModelError("ErrorCode", $"{InternalServerError.ErrorCodes}");
 
                     return this.NotFound(new ValidationProblemDetails(this.ModelState));
                 });

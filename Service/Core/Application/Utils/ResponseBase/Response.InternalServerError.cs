@@ -2,9 +2,9 @@
 {
     public sealed partial class Response
     {
-        public sealed partial class NotFound
+        public sealed partial class InternalServerError
         {
-            public NotFound(string message, ErrorCodes errorCodes)
+            public InternalServerError(string message, ErrorCodes errorCodes)
             {
                 this.Message = message;
                 this.ErrorCodes = errorCodes;

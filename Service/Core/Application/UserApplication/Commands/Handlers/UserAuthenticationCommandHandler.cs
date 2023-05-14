@@ -24,16 +24,18 @@ namespace Application.UserApplication.Commands.Handlers
                 var user = await _userRepository.GetUserByUserNameOrEmail(request.LoginUser.EmailOrUserName);
                 if (user == null)
                 {
-                    return new NotFound("User not found", ErrorCodes.USER_NOT_FOUND);
+                    return new BadRequest("User not found", ErrorCodes.USER_NOT_FOUND);
                 }
 
                 if (!user.VerifyPasswordHash(request.LoginUser.Password))
                 {
-                    return new BadRequest("User password is incorrect", ErrorCodes.USER_PASSWORD_INCORRECT);
+                    return new BadRequest("User password is incorrect", ErrorCodes.USER_INCORRECT_Credentials);
                 }
 
                 var tokenDto = new TokenDto
                 {
+                    UserId = user.Id,
+                    Role = user.Role,
                     Token = TokenService.GenerateToken(user, request.SecretKey),
                 };
 
@@ -42,7 +44,7 @@ namespace Application.UserApplication.Commands.Handlers
             }
             catch (Exception)
             {
-                return new BadRequest("Unable to athenticate user", ErrorCodes.UNABLE_TO_ATHENTICATE_USER);
+                return new InternalServerError("Unable to athenticate user", ErrorCodes.UNABLE_TO_ATHENTICATE_USER);
             }
         }
     }

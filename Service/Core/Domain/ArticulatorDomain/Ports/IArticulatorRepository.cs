@@ -6,5 +6,6 @@ namespace Domain.ArticulatorDomain.Ports
     {
         public Task<int> Create(Articulator articulator);
         public Task<int> Update(Articulator articulator);
+        public Task<Articulator?> GetById(int id);
     }
 }

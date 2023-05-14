@@ -6,5 +6,6 @@ namespace Domain.ManagerDomain.Ports
     {
         public Task<int> Create(Manager manager);
         public Task<int> Update(Manager manager);
+        public Task<Manager?> GetById(int id);
     }
 }

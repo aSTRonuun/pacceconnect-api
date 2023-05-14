@@ -1,4 +1,5 @@
 ﻿using Application.Utils.IDtoBase;
+using Domain.ArticulatorDomain.Entities;
 using Domain.ArticulatorDomain.Enuns;
 
 namespace Application.ArticulatorApplication.Dtos
@@ -13,5 +14,20 @@ namespace Application.ArticulatorApplication.Dtos
         public string? PhoneNumber { get; set; }
         public Course Course { get; set; }
         public int Matriculation { get; set; }
+
+        public static ArticulatorDto MapToDto(Articulator articulator)
+        {
+            return new ArticulatorDto
+            {
+                Id = articulator.Id,
+                Name = articulator.Name,
+                SurName = articulator.SurName,
+                UserName = articulator.UserName,
+                Email = articulator.Email,
+                PhoneNumber = articulator.PhoneNumber,
+                Course = articulator.StudentId.Course,
+                Matriculation = articulator.StudentId.Matriculation,
+            };
+        }
     }
 }

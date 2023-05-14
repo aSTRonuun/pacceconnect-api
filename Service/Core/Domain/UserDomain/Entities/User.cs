@@ -19,6 +19,9 @@ namespace Domain.UserDomain.Entities
 
         public void CreatePasswordHash(string password)
         {
+            if (password.Length < 8)
+                throw new UserPasswordLengthException();
+
             using (var hmac = new HMACSHA512())
             {
                 PasswordSalt = hmac.Key;
