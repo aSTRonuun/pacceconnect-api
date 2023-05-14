@@ -1,0 +1,56 @@
+image: mcr.microsoft.com/dotnet/sdk:6.0
+
+stages:
+  - build
+  - test
+  - coverage-test
+  - release
+
+variables:
+  SOLUTION_NAME_FILE: PACCEConnect.sln
+
+build:
+  stage: build
+  script:
+    - dotnet build "$SOLUTION_NAME_FILE"
+
+test:
+  stage: test
+  script:
+    - 'dotnet test "$SOLUTION_NAME_FILE"
+      --test-adapter-path:.
+      --logger:"junit;LogFilePath=..\artifacts\{assembly}-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"'
+  artifacts:
+    when: always
+    paths:
+      - ./**/*test-result.xml
+    reports:
+      junit:
+        - ./**/*test-result.xml
+
+test-with-coverage:
+  stage: coverage-test
+  script:
+    - dotnet tool install dotnet-reportgenerator-globaltool --tool-path tools
+    - dotnet test "$SOLUTION_NAME_FILE" --collect:"XPlat Code Coverage" --results-directory:"./cobertura"
+    - ./tools/reportgenerator "-reports:./cobertura/**/coverage.cobertura.xml" "-targetdir:Reports_Coverage" -reportTypes:TextSummary
+    - cat ./Reports_Coverage/Summary.txt
+    - rm -r ./tools
+  coverage: /Line coverage[\s\S].+%/
+  artifacts:
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: ./**/coverage.cobertura.xml
+
+release:
+  stage: release
+  only:
+    - main
+  artifacts:
+    paths:
+      - publish/
+  script:
+    - dotnet publish "$SOLUTION_NAME_FILE" -c Release -o publish 
+
+

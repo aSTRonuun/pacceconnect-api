@@ -20,17 +20,17 @@ namespace Domain.ArticulatorDomain.Entities
 
         private void ValidateStateArticulator()
         {
+            if (string.IsNullOrEmpty(Name) ||
+                string.IsNullOrEmpty(SurName))
+            {
+                throw new ArticulatorMissingRequiredInformation();
+            }
+
             if (StudentId == null ||
                 StudentId.Course.Equals(null) ||
                 StudentId.Matriculation == 0)
             {
                 throw new InvalidStudentIdException();
-            }
-            
-            if (string.IsNullOrEmpty(Name) ||
-                string.IsNullOrEmpty(SurName))
-            {
-                throw new ArticulatorMissingRequiredInformation();
             }
         }
 

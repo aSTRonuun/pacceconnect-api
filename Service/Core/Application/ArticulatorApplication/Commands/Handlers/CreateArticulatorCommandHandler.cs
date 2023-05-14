@@ -4,6 +4,7 @@ using MediatR;
 using static Application.Utils.ResponseBase.Response;
 using Domain.ArticulatorDomain.Ports;
 using Application.ArticulatorApplication.Dtos;
+using Domain.UserDomain.Exceptions;
 
 namespace Application.ArticulatorApplication.Commands.Handlers
 {
@@ -31,9 +32,17 @@ namespace Application.ArticulatorApplication.Commands.Handlers
 
                 return new Success(articulatorDto);
             }
+            catch (ArticulatorMissingRequiredInformation)
+            {
+                return new BadRequest("Articulator no has required infomations", ErrorCodes.ARTICULATOR_MISSING_REQUIRED_INFORMATION);
+            }
+            catch (UserPasswordLengthException)
+            {
+                return new BadRequest("User password length is invalid", ErrorCodes.USER_LENGTH_IS_INVALID);
+            }
             catch (Exception)
             {
-                return new BadRequest("Articulator could not be storage", ErrorCodes.ARTICULATOR_COULD_NOT_BE_STORAGE);
+                return new InternalServerError("Articulator could not be storage", ErrorCodes.ARTICULATOR_COULD_NOT_BE_STORAGE);
             }
         }
     }
