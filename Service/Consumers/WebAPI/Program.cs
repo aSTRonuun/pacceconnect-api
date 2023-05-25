@@ -4,9 +4,11 @@ using Application.UserApplication.Commands.Handlers;
 using Application.Utils.ResponseBase;
 using Data;
 using Data.ArticulatorData;
+using Data.CellData;
 using Data.ManagerData;
 using Data.UserData;
 using Domain.ArticulatorDomain.Ports;
+using Domain.CellDomain.Ports;
 using Domain.ManagerDomain.Ports;
 using Domain.UserDomain.Ports;
 using MediatR;
@@ -33,7 +35,7 @@ builder.Services.AddMediatR(typeof(Response));
 
 // Add Connection Database
 #region
-var connectionString = builder.Configuration["ConnectionStrings:MySQLConnectionStringLocal"];
+var connectionString = builder.Configuration["ConnectionStrings:MySQLConnectionStringDocker"];
 var optionsBuilder = new DbContextOptionsBuilder<PACCEConnectDbContext>();
 optionsBuilder.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 5)));
 builder.Services.AddDbContext<PACCEConnectDbContext>(
@@ -45,6 +47,7 @@ builder.Services.AddDbContext<PACCEConnectDbContext>(
 builder.Services.AddScoped<IArticulatorRepository, ArticulatorRepository>();
 builder.Services.AddScoped<IManagerRepository, ManagerRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<ICellRepository, CellRepository>();
 #endregion
 
 // Authentication Configuration
@@ -118,6 +121,11 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors(x => x
+    .AllowAnyOrigin()
+       .AllowAnyMethod()
+          .AllowAnyHeader());
 
 app.MapControllers();
 
