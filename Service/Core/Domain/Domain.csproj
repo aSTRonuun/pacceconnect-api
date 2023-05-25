@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="CellDomain\Enuns\" />
+    <Folder Include="CellDomain\ValueObjects\" />
+  </ItemGroup>
+
 </Project>

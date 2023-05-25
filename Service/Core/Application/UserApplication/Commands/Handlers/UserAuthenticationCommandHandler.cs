@@ -35,6 +35,7 @@ namespace Application.UserApplication.Commands.Handlers
                 var tokenDto = new TokenDto
                 {
                     UserId = user.Id,
+                    UserName = user.UserName,
                     Role = user.Role,
                     Token = TokenService.GenerateToken(user, request.SecretKey),
                 };
