@@ -8,16 +8,16 @@ using static Application.Utils.ResponseBase.Response;
 
 namespace Application.CellApplication.Commands.Handlers
 {
-    public class CreateCellCommandHandler : IRequestHandler<CreateCellCommand, Response>
+    public class UpdateCellPlanCommandHandler : IRequestHandler<UpdateCellCommand, Response>
     {
-        private ICellRepository _cellRepository;
+        private readonly ICellRepository _cellRepository;
 
-        public CreateCellCommandHandler(ICellRepository cellRepository)
+        public UpdateCellPlanCommandHandler(ICellRepository cellRepository)
         {
             _cellRepository = cellRepository;
         }
 
-        public async Task<Response> Handle(CreateCellCommand request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(UpdateCellCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -25,9 +25,6 @@ namespace Application.CellApplication.Commands.Handlers
                 var cell = CellDto.MapToEntity(cellDto);
 
                 await cell.Save(_cellRepository);
-
-                cellDto.Id = cell.Id;
-                cellDto.Plan.Id = cell.CellPlan.Id;
 
                 return new Success(cellDto);
             }

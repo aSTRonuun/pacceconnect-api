@@ -1,4 +1,5 @@
 ﻿using Domain.CellDomain.Entities;
+using Domain.CellDomain.Enuns;
 using Domain.CellDomain.Ports;
 using Microsoft.EntityFrameworkCore;
 
@@ -39,11 +40,18 @@ namespace Data.CellData
                 .FirstOrDefaultAsync(x => x.Id == cellId);
         }
 
-        public Task<List<Cell>> GetAllCells()
+        public async Task<IEnumerable<Cell>> GetAllCells()
         {
-            return _context.Cells
+            return await _context.Cells
                 .Include(x => x.Articulator)
+                .Where(x => x.Status != StatusCell.Created)
                 .ToListAsync();
+        }
+
+        public async Task<int> Update(Cell cell)
+        {
+            _context.Cells.Update(cell);
+            return await _context.SaveChangesAsync(); 
         }
     }
 }

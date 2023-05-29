@@ -3,7 +3,7 @@ using Domain.CellDomain.Enuns;
 using Domain.CellDomain.Exceptions;
 using Domain.CellDomain.Ports;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using Action = Domain.CellDomain.Enuns.Action;
 
 namespace Domain.CellDomain.Entities
 {
@@ -67,7 +67,23 @@ namespace Domain.CellDomain.Entities
 
         private async Task Update(ICellRepository cellRepository)
         {
-            throw new NotImplementedException();
+            await cellRepository.Update(this);
+        }
+
+        public void ChangeState(Action action)
+        {
+            Status = (Status, action) switch
+            {
+                (StatusCell.Created, Action.Submit) => StatusCell.Submeted,
+                (StatusCell.Submeted, Action.Review) => StatusCell.Reviewed,
+                (StatusCell.Submeted, Action.Approve) => StatusCell.Active,
+                (StatusCell.Reviewed, Action.Correct) => StatusCell.Corrected,
+                (StatusCell.Corrected, Action.Submit) => StatusCell.Submeted,
+                (StatusCell.Active, Action.Close) => StatusCell.Closed,
+                (StatusCell.Active, Action.Cancel) => StatusCell.Canceled,
+                (StatusCell.Active, Action.Submit) => StatusCell.Submeted,
+                (StatusCell.Closed, Action.Reopen) => StatusCell.Active,
+            };
         }
     }
 }

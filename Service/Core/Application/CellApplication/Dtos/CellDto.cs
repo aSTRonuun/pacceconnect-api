@@ -16,7 +16,7 @@ namespace Application.CellApplication.Dtos
 
         public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
-        public StatusCell Status { get; set; }
+        public StatusCell? Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
         public int ArticulatorId { get; set; }
@@ -29,7 +29,6 @@ namespace Application.CellApplication.Dtos
             {
                 Id = cellDto.Id,
                 Name = cellDto.Name,
-                Status = cellDto.Status,
                 CreatedAt = cellDto.CreatedAt,
                 UpdatedAt = cellDto.UpdatedAt,
                 ArticulatorId = cellDto.ArticulatorId,

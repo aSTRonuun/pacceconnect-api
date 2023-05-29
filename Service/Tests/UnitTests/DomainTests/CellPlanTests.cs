@@ -39,12 +39,12 @@ namespace UnitTests.DomainTests
         }
 
         [Test]
-        public void PlanIsCompleted_WhenHasOneValidateFalse_ShouldReturnFalse()
+        public void PlanIsCompleted_WhenHasOneComment_ShouldReturnFalse()
         {
             var cellPlan = new CellPlan()
             {
                 Title = "Title",
-                TitleIsValid = false,
+                TitleComment = "Invalid",
                 Local = "Local",
                 Mode = "Mode",
                 Synopsis = "Synopsis",
@@ -61,32 +61,20 @@ namespace UnitTests.DomainTests
         }
 
         [Test]
-        public void PlanIsCompleted_WhenHasAllValidateAreTrue_ShouldReturnTrue()
+        public void PlanIsCompleted_WhenNoHasAnyComment_ShouldReturnTrue()
         {
             var cellPlan = new CellPlan()
             {
                 Title = "Title",
-                TitleIsValid = true,
                 Local = "Local",
-                LocalIsValid = true,
                 Mode = "Mode",
-                ModeIsValid = true,
                 Synopsis = "Synopsis",
-                SynopsisIsValid = true,
                 Justification = "Justification",
-                JustificationIsValid = true,
                 TargetAudience = "TarguetAudience",
-                TargetAudienceIsValid = true,
                 Activities = "Activities",
-                ActivitiesIsValid = true,
                 Tools = "Tools",
-                ToolsIsValid = true,
                 ResultIndicators = "ResultIndicators",
-                ResultIndicatorsIsValid = true,
                 MeansOfVerification = "MeansOfVerfication",
-                MeansOfVerificationIsValid = true,
-                DateIsValid = true,
-                DurationIsValid = true,
             };
 
             Assert.True(cellPlan.IsValidate());

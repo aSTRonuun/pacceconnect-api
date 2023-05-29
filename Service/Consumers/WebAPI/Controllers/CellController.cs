@@ -32,11 +32,11 @@ namespace WebAPI.Controllers
                 return this.BadRequest(new ValidationProblemDetails(this.ModelState));
             }
 
-            var handlerReponse = await _mediator
+            var handlerResponse = await _mediator
                 .Send(new CreateCellCommand(cellDto))
                 .ConfigureAwait(false);
 
-            return handlerReponse.Match<ActionResult>(
+            return handlerResponse.Match<ActionResult>(
                 success => this.Ok(success.Dto),
                 badRequest =>
                 {
@@ -66,18 +66,18 @@ namespace WebAPI.Controllers
                 return this.BadRequest(new ValidationProblemDetails(this.ModelState));
             }
 
-            var handlerReponse = await _mediator
+            var handlerResponse = await _mediator
                 .Send(new GetCellByUserIdQuery(articulatorId))
                 .ConfigureAwait(false);
 
-            return handlerReponse.Match<ActionResult>(
+            return handlerResponse.Match<ActionResult>(
                 success => this.Ok(success.Dto),
                 badRequest =>
                 {
                     this.ModelState.AddModelError("Message", badRequest.Message);
                     this.ModelState.AddModelError("ErrorCode", $"{badRequest.ErrorCodes}");
 
-                    return this.BadRequest(new ValidationProblemDetails(this.ModelState));
+                    return this.NotFound(new ValidationProblemDetails(this.ModelState));
                 },
                 InternalServerError =>
                 {
@@ -100,12 +100,46 @@ namespace WebAPI.Controllers
                 return this.BadRequest(new ValidationProblemDetails(this.ModelState));
             }
 
-            var handlerReponse = await _mediator
+            var handlerResponse = await _mediator
                 .Send(new GetAllCellsQuery())
                 .ConfigureAwait(false);
 
-            return handlerReponse.Match<ActionResult>(
+            return handlerResponse.Match<ActionResult>(
                 success => this.Ok(success.Dtos),
+                badRequest =>
+                {
+                    this.ModelState.AddModelError("Message", badRequest.Message);
+                    this.ModelState.AddModelError("ErrorCode", $"{badRequest.ErrorCodes}");
+
+                    return this.BadRequest(new ValidationProblemDetails(this.ModelState));
+                },
+                InternalServerError =>
+                {
+                    this.ModelState.AddModelError("Message", InternalServerError.Message);
+                    this.ModelState.AddModelError("ErrorCode", $"{InternalServerError.ErrorCodes}");
+
+                    return this.NotFound(new ValidationProblemDetails(this.ModelState));
+                });
+        }
+
+        [HttpPut]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(Status401Unauthorized)]
+        [ProducesResponseType(Status404NotFound)]
+        [ProducesResponseType(Status500InternalServerError)]
+        public async Task<IActionResult> Update([FromBody] CellDto cellDto)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(new ValidationProblemDetails(this.ModelState));
+            }
+
+            var handlerResponse = await _mediator
+                .Send(new UpdateCellCommand(cellDto))
+                .ConfigureAwait(false);
+
+            return handlerResponse.Match<ActionResult>(
+                success => this.Ok(success.Dto),
                 badRequest =>
                 {
                     this.ModelState.AddModelError("Message", badRequest.Message);
