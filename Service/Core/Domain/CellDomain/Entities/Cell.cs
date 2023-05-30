@@ -42,10 +42,7 @@ namespace Domain.CellDomain.Entities
         public bool IsValidate()
         {
             ValidateStateCell();
-            if (CellPlan != null)
-            {
-                CellPlan.IsValidate();
-            } 
+            CellPlan.IsValidate();
             return true;
         }
 

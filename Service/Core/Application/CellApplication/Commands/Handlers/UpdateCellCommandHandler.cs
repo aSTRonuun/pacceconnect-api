@@ -8,11 +8,11 @@ using static Application.Utils.ResponseBase.Response;
 
 namespace Application.CellApplication.Commands.Handlers
 {
-    public class UpdateCellPlanCommandHandler : IRequestHandler<UpdateCellCommand, Response>
+    public class UpdateCellCommandHandler : IRequestHandler<UpdateCellCommand, Response>
     {
         private readonly ICellRepository _cellRepository;
 
-        public UpdateCellPlanCommandHandler(ICellRepository cellRepository)
+        public UpdateCellCommandHandler(ICellRepository cellRepository)
         {
             _cellRepository = cellRepository;
         }
@@ -38,7 +38,7 @@ namespace Application.CellApplication.Commands.Handlers
             }
             catch (Exception)
             {
-                return new BadRequest("Cell could not be storage", ErrorCodes.CELL_COULD_NOT_BE_STORAGE);
+                return new InternalServerError("Cell could not be storage", ErrorCodes.CELL_COULD_NOT_BE_STORAGE);
             }
         }
     }

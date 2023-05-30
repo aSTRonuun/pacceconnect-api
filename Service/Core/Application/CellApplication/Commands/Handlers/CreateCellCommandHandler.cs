@@ -41,7 +41,7 @@ namespace Application.CellApplication.Commands.Handlers
             }
             catch (Exception)
             {
-                return new BadRequest("Cell could not be storage", ErrorCodes.CELL_COULD_NOT_BE_STORAGE);
+                return new InternalServerError("Cell could not be storage", ErrorCodes.CELL_COULD_NOT_BE_STORAGE);
             }
         }
     }

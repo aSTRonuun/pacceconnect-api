@@ -31,7 +31,7 @@ namespace Application.CellApplication.Queries.Handler
             }
             catch (Exception)
             {
-                return new InternalServerError("Cell could not be founded", ErrorCodes.CELLPLAN_COULD_NOT_BE_STORE);
+                return new InternalServerError("Cell could not be founded", ErrorCodes.CELL_COULD_NOT_BE_FOUND);
             }
         }
     }
