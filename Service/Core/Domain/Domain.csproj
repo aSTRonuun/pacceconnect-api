@@ -7,8 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CellDomain\ValueObjects\**" />
+    <EmbeddedResource Remove="CellDomain\ValueObjects\**" />
+    <None Remove="CellDomain\ValueObjects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="CellDomain\Enuns\" />
-    <Folder Include="CellDomain\ValueObjects\" />
   </ItemGroup>
 
 </Project>

@@ -155,5 +155,39 @@ namespace WebAPI.Controllers
                     return this.NotFound(new ValidationProblemDetails(this.ModelState));
                 });
         }
+
+        [HttpPut("status/{cellId}/action/{intention}")]
+        [ProducesResponseType(200)]
+        [ProducesResponseType(Status401Unauthorized)]
+        [ProducesResponseType(Status404NotFound)]
+        [ProducesResponseType(Status500InternalServerError)]
+        public async Task<IActionResult> UpdateStatus([FromBody] CellDto cellDto)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.BadRequest(new ValidationProblemDetails(this.ModelState));
+            }
+
+            var handlerResponse = await _mediator
+                .Send(new UpdateCellCommand(cellDto))
+                .ConfigureAwait(false);
+
+            return handlerResponse.Match<ActionResult>(
+                success => this.Ok(success.Dto),
+                badRequest =>
+                {
+                    this.ModelState.AddModelError("Message", badRequest.Message);
+                    this.ModelState.AddModelError("ErrorCode", $"{badRequest.ErrorCodes}");
+
+                    return this.BadRequest(new ValidationProblemDetails(this.ModelState));
+                },
+                InternalServerError =>
+                {
+                    this.ModelState.AddModelError("Message", InternalServerError.Message);
+                    this.ModelState.AddModelError("ErrorCode", $"{InternalServerError.ErrorCodes}");
+
+                    return this.NotFound(new ValidationProblemDetails(this.ModelState));
+                });
+        }
     }
 }
