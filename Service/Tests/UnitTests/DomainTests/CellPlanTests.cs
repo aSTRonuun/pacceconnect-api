@@ -15,7 +15,7 @@ namespace UnitTests.DomainTests
                 Local = "",
             };
 
-            Assert.Throws<MissingRequiredInformationException>(() => cellPlan.IsValidate());
+            Assert.Throws<CellMissingRequiredInformationException>(() => cellPlan.IsValidate());
         }
 
         [Test]

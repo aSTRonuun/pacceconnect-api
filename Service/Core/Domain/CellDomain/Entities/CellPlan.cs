@@ -1,5 +1,4 @@
 ﻿using Domain.CellDomain.Exceptions;
-using Domain.CellDomain.Ports;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain.CellDomain.Entities
@@ -46,7 +45,7 @@ namespace Domain.CellDomain.Entities
                 string.IsNullOrWhiteSpace(ResultIndicators) ||
                 string.IsNullOrWhiteSpace(MeansOfVerification))
             {
-                throw new MissingRequiredInformationException();
+                throw new CellMissingRequiredInformationException();
             }
         }
 

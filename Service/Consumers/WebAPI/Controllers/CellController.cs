@@ -1,10 +1,12 @@
 ﻿using Application.CellApplication.Commands;
 using Application.CellApplication.Dtos;
 using Application.CellApplication.Queries;
+using Domain.CellDomain.Enuns;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static Microsoft.AspNetCore.Http.StatusCodes;
+using Action = Domain.CellDomain.Enuns.Action;
 
 namespace WebAPI.Controllers
 {
@@ -161,7 +163,7 @@ namespace WebAPI.Controllers
         [ProducesResponseType(Status401Unauthorized)]
         [ProducesResponseType(Status404NotFound)]
         [ProducesResponseType(Status500InternalServerError)]
-        public async Task<IActionResult> UpdateStatus([FromBody] CellDto cellDto)
+        public async Task<IActionResult> UpdateStatus(int cellId, Action intention)
         {
             if (!this.ModelState.IsValid)
             {
@@ -169,7 +171,7 @@ namespace WebAPI.Controllers
             }
 
             var handlerResponse = await _mediator
-                .Send(new UpdateCellCommand(cellDto))
+                .Send(new UpdateStatusCellCommand(intention, cellId))
                 .ConfigureAwait(false);
 
             return handlerResponse.Match<ActionResult>(

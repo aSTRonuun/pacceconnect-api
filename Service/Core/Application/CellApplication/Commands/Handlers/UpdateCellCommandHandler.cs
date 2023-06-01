@@ -28,11 +28,11 @@ namespace Application.CellApplication.Commands.Handlers
 
                 return new Success(cellDto);
             }
-            catch (MissingRequiredInformationException)
+            catch (CellMissingRequiredInformationException)
             {
                 return new BadRequest("Cell no has required information", ErrorCodes.CELL_MISSING_REQUIRED_INFORMATIONS);
             }
-            catch (MissingArticulatorEntityRequiredInformationException)
+            catch (CellMissingArticulatorEntityRequiredInformationException)
             {
                 return new BadRequest("Cell no has articulator required information", ErrorCodes.CELL_MISSING_ARTICULATOR_INFORMATION);
             }

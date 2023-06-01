@@ -30,12 +30,12 @@ namespace Domain.CellDomain.Entities
         {
             if (string.IsNullOrWhiteSpace(Name))
             {
-                throw new MissingRequiredInformationException();
+                throw new CellMissingRequiredInformationException();
             }
 
             if (ArticulatorId == 0)
             {
-                throw new MissingArticulatorEntityRequiredInformationException();
+                throw new CellMissingArticulatorEntityRequiredInformationException();
             }
         }
 
@@ -75,10 +75,12 @@ namespace Domain.CellDomain.Entities
                 (StatusCell.Submeted, Action.Review) => StatusCell.Reviewed,
                 (StatusCell.Submeted, Action.Approve) => StatusCell.Active,
                 (StatusCell.Reviewed, Action.Correct) => StatusCell.Corrected,
-                (StatusCell.Corrected, Action.Submit) => StatusCell.Submeted,
+                (StatusCell.Corrected, Action.Review) => StatusCell.Reviewed,
+                (StatusCell.Corrected, Action.Approve) => StatusCell.Active,
                 (StatusCell.Active, Action.Close) => StatusCell.Closed,
                 (StatusCell.Active, Action.Cancel) => StatusCell.Canceled,
                 (StatusCell.Active, Action.Submit) => StatusCell.Submeted,
+                (StatusCell.Active, Action.Review) => StatusCell.Reviewed,
                 (StatusCell.Closed, Action.Reopen) => StatusCell.Active,
             };
         }

@@ -35,7 +35,7 @@ builder.Services.AddMediatR(typeof(Response));
 
 // Add Connection Database
 #region
-var connectionString = builder.Configuration["ConnectionStrings:MySQLConnectionStringDocker"];
+var connectionString = builder.Configuration["ConnectionStrings:MySQLConnectionStringLocal"];
 var optionsBuilder = new DbContextOptionsBuilder<PACCEConnectDbContext>();
 optionsBuilder.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 5)));
 builder.Services.AddDbContext<PACCEConnectDbContext>(

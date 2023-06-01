@@ -23,6 +23,7 @@ namespace Data.CellData
         public async Task<Cell?> GetCellById(int id)
         {
             return await _context.Cells
+                .Include(x => x.CellPlan)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
 
