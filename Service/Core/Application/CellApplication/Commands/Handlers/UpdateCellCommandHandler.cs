@@ -24,6 +24,15 @@ namespace Application.CellApplication.Commands.Handlers
                 var cellDto = request.CellDto;
                 var cell = CellDto.MapToEntity(cellDto);
 
+                var cellStatus = await _cellRepository.GetCellById(cellDto.Id);
+                if (cellStatus == null)
+                {
+                    return new BadRequest("Cell not found", ErrorCodes.CELL_NOT_FOUND);
+                }
+
+                cell.Status = cellStatus.Status;
+                cellDto.Status = cellStatus.Status;
+
                 await cell.Save(_cellRepository);
 
                 return new Success(cellDto);

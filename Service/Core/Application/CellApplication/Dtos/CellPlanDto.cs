@@ -8,7 +8,7 @@ namespace Application.CellApplication.Dtos
         public int Id { get; set; }
         public int CellId { get; set; }
         public string Title { get; set; } = string.Empty;
-        public string? TitleComment { get; set; } = string.Empty;
+        public string? TitleComment { get; set; }
         public string Local { get; set; } = string.Empty;
         public string? LocalComment { get; set; } = string.Empty;
         public DateTime Date { get; set; }
@@ -46,7 +46,7 @@ namespace Application.CellApplication.Dtos
                 Duration = cellPlan.Duration,
                 DurationComment = cellPlan.DurationComment,
                 Mode = cellPlan.Mode,
-                ModeComment = cellPlan.ModeComment,
+                ModeComment = cellPlan.ModeComment, 
                 Synopsis = cellPlan.Synopsis,
                 SynopsisComment = cellPlan.SynopsisComment,
                 Justification = cellPlan.Justification,

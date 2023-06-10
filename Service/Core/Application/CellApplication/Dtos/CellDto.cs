@@ -9,7 +9,6 @@ namespace Application.CellApplication.Dtos
     {
         public CellDto() 
         {
-            Status = StatusCell.Created;
             CreatedAt = DateTime.Now;
             UpdatedAt = DateTime.Now;
         }

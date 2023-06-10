@@ -8,6 +8,7 @@ using NUnit.Framework;
 using static Application.Utils.ResponseBase.Response;
 using FluentAssertions;
 using Domain.CellDomain.Entities;
+using Domain.CellDomain.Enuns;
 
 namespace UnitTests.ApplicationTests.ArticulatorApplication.Command
 {
@@ -29,6 +30,14 @@ namespace UnitTests.ApplicationTests.ArticulatorApplication.Command
             // Arrange
             var requestInvalid = new UpdateCellCommand(new CellDto() { Name = "" });
 
+            var cellOld = new Cell()
+            {
+                Status = StatusCell.Submeted,
+            };
+
+            _cellRepositoryMock.Setup(x => x.GetCellById(It.IsAny<int>()))
+                .ReturnsAsync(cellOld);
+
             // Action
             var response = _updateCellCommandHandler.Handle(requestInvalid, CancellationToken.None);
 
@@ -47,6 +56,14 @@ namespace UnitTests.ApplicationTests.ArticulatorApplication.Command
                     Name = "Test"
                 }
             );
+
+            var cellOld = new Cell()
+            {
+                Status = StatusCell.Submeted,
+            };
+
+            _cellRepositoryMock.Setup(x => x.GetCellById(It.IsAny<int>()))
+                .ReturnsAsync(cellOld);
 
             // Action
             var response = _updateCellCommandHandler.Handle(requestInvalid, CancellationToken.None);
@@ -82,6 +99,14 @@ namespace UnitTests.ApplicationTests.ArticulatorApplication.Command
             }
             );
 
+            var cellOld = new Cell()
+            {
+                Status = StatusCell.Submeted,
+            };
+
+            _cellRepositoryMock.Setup(x => x.GetCellById(It.IsAny<int>()))
+                .ReturnsAsync(cellOld);
+
             _cellRepositoryMock.Setup(x => x.Update(It.IsAny<Cell>()))
                 .ThrowsAsync(new Exception());
 
@@ -92,6 +117,43 @@ namespace UnitTests.ApplicationTests.ArticulatorApplication.Command
             var result = response.Result.Value.Should().BeOfType<InternalServerError>().Which;
             _ = result.Message.Should().Be("Cell could not be storage");
             _ = result.ErrorCodes.Should().Be(ErrorCodes.CELL_COULD_NOT_BE_STORAGE);
+        }
+
+        [Test]
+        public void Handler_WhenCellIdNoExists_ShouldBeReturnBadRequest()
+        {
+            // Arrange
+            var requestInvalid = new UpdateCellCommand(new CellDto()
+            {
+                Id = 1,
+                Name = "Test",
+                ArticulatorId = 1,
+                Plan = new CellPlanDto()
+                {
+                    Title = "Test",
+                    Activities = "Test",
+                    Justification = "Test",
+                    MeansOfVerification = "Test",
+                    Local = "Test",
+                    Mode = "Test",
+                    Synopsis = "Test",
+                    Tools = "Test",
+                    ResultIndicators = "Test",
+                    TargetAudience = "Test",
+                }
+            }
+            );
+
+            _cellRepositoryMock.Setup(x => x.Update(It.IsAny<Cell>()))
+                .ThrowsAsync(new Exception());
+
+            // Action
+            var response = _updateCellCommandHandler.Handle(requestInvalid, CancellationToken.None);
+
+            // Assert
+            var result = response.Result.Value.Should().BeOfType<BadRequest>().Which;
+            _ = result.Message.Should().Be("Cell not found");
+            _ = result.ErrorCodes.Should().Be(ErrorCodes.CELL_NOT_FOUND);
         }
 
         [Test]
@@ -117,6 +179,14 @@ namespace UnitTests.ApplicationTests.ArticulatorApplication.Command
                 }
             }
             );
+
+            var cellOld = new Cell()
+            {
+                Status = StatusCell.Submeted,
+            };
+
+            _cellRepositoryMock.Setup(x => x.GetCellById(It.IsAny<int>()))
+                .ReturnsAsync(cellOld);
 
             _cellRepositoryMock.Setup(x => x.Create(It.IsAny<Cell>()))
                 .ReturnsAsync(1);

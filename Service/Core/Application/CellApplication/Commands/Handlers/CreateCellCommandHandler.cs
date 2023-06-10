@@ -1,6 +1,7 @@
 ﻿using Application.CellApplication.Dtos;
 using Application.Utils;
 using Application.Utils.ResponseBase;
+using Domain.CellDomain.Enuns;
 using Domain.CellDomain.Exceptions;
 using Domain.CellDomain.Ports;
 using MediatR;
@@ -23,6 +24,8 @@ namespace Application.CellApplication.Commands.Handlers
             {
                 var cellDto = request.CellDto;
                 var cell = CellDto.MapToEntity(cellDto);
+
+                cell.Status = StatusCell.Created;
 
                 await cell.Save(_cellRepository);
 

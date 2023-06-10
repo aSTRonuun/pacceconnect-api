@@ -23,6 +23,7 @@ namespace Data.CellData
         public async Task<Cell?> GetCellById(int id)
         {
             return await _context.Cells
+                .AsNoTracking()
                 .Include(x => x.CellPlan)
                 .FirstOrDefaultAsync(x => x.Id == id);
         }
@@ -51,7 +52,7 @@ namespace Data.CellData
 
         public async Task<int> Update(Cell cell)
         {
-            _context.Cells.Update(cell);
+            _context.Update(cell);
             return await _context.SaveChangesAsync(); 
         }
     }
